@@ -1,11 +1,15 @@
 class Mouse {
   /**
-   * @param {boolean} debug
+   * @param {Logger} opt.logger
+   * @param {string} opt.tag logger tag
+   * @param {boolean} opt.debug
    */
-  constructor(debug) {
-    this._logger = new Logger('Mouse');
+  constructor(opt) {
+    this._logger = opt.logger;
 
-    this._debug = debug || false;
+    this._tag = opt.tag;
+    this._debug = opt.debug;
+
     this._x = undefined;
     this._y = undefined;
 
@@ -18,8 +22,6 @@ class Mouse {
    * @returns {Object}
    */
   getMousePosition() {
-    if (this._debug) this._logger.calling('getMousePosition');
-
     return { x: this._x, y: this._y };
   }
 
@@ -29,7 +31,7 @@ class Mouse {
    * @returns {void}
    */
   _addEventListeners() {
-    if (this._debug) this._logger.calling('_addEventListeners');
+    if (this._debug) this._logger.calling(this._tag, '_addEventListeners');
 
     window.addEventListener('mouseout', this._mouseOutListener.bind(this));
     window.addEventListener('mousemove', this._mouseMoveListener.bind(this));
@@ -41,7 +43,7 @@ class Mouse {
    * @returns {void}
    */
   _mouseOutListener() {
-    if (this._debug) this._logger.calling('_mouseOutListener');
+    if (this._debug) this._logger.calling(this._tag, '_mouseOutListener');
 
     this._x = undefined;
     this._y = undefined;
@@ -53,7 +55,7 @@ class Mouse {
    * @returns {void}
    */
   _mouseMoveListener(event) {
-    if (this._debug) this._logger.calling('_mouseMoveListener');
+    if (this._debug) this._logger.calling(this._tag, '_mouseMoveListener');
 
     this._x = event.x;
     this._y = event.y;
