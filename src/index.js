@@ -22,7 +22,6 @@
   });
 
   const mouse = new Mouse({
-    id,
     tag: 'Mouse',
     debug,
     logger,
