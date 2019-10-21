@@ -9,37 +9,40 @@ class Logger {
   /**
    * @public
    *
+   * @param {string} tag
    * @param {string} functionName
    *
    * @returns {void}
    */
-  calling(functionName = '') {
-    this._log(`@${this._name} @${functionName} calling...`, 'white');
+  calling(tag = '', functionName = '') {
+    this._log(`@${this._name} @${tag} @${functionName} calling...`, 'green');
   }
 
   /**
    * @public
    *
+   * @param {string} tag
    * @param {string} functionName
    * @param {string} message
    *
    * @returns {void}
    */
-  log(functionName = '', message = '') {
-    this._log(`@${this._name} @${functionName} ${message}`, 'white');
+  log(tag = '', functionName = '', message = '') {
+    this._log(`@${this._name} @${tag} @${functionName} ${message}`, 'white');
   }
 
   /**
    * @public
    *
+   * @param {string} tag
    * @param {string} functionName
    * @param {string} message
    * @param {object} stack
    *
    * @returns {void}
    */
-  error(functionName = '', message = '', stack = {}) {
-    this._log(`@${this._name} @${functionName} ${message}`, 'red');
+  error(tag = '', functionName = '', message = '', stack = {}) {
+    this._log(`@${this._name} @${tag} @${functionName} ${message}`, 'red');
     this._logErrorStack(stack);
   }
 
