@@ -1,13 +1,16 @@
 class Canvas {
   /**
-   * @param {string} id
-   * @param {boolean} debug
+   * @param {Logger} opt.logger
+   * @param {string} opt.id
+   * @param {string} opt.tag logger tag
+   * @param {boolean} opt.debug
    */
-  constructor(id, debug) {
-    this._logger = new Logger('Canvas');
+  constructor(opt) {
+    this._logger = opt.logger;
 
-    this._id = id;
-    this._debug = debug || false;
+    this._id = opt.id;
+    this._tag = opt.tag;
+    this._debug = opt.debug;
 
     this._canvas = undefined;
     this._ctx = undefined;
@@ -24,7 +27,7 @@ class Canvas {
    * @returns {CanvasRenderingContext2D}
    */
   getContext() {
-    if (this._debug) this._logger.calling('getContext');
+    if (this._debug) this._logger.calling(this._tag, 'getContext');
 
     return this._ctx;
   }
@@ -35,8 +38,6 @@ class Canvas {
    * @returns {void}
    */
   clearRect() {
-    if (this._debug) this._logger.calling('clearRect');
-
     this._ctx.clearRect(0, 0, innerWidth, innerHeight);
   }
 
@@ -46,7 +47,7 @@ class Canvas {
    * @returns {void}
    */
   _createElement() {
-    if (this._debug) this._logger.calling('_createElement');
+    if (this._debug) this._logger.calling(this._tag, '_createElement');
 
     this._canvas = document.createElement('canvas');
 
@@ -68,7 +69,7 @@ class Canvas {
    * @returns {void}
    */
   _addEventListeners() {
-    if (this._debug) this._logger.calling('_addEventListeners');
+    if (this._debug) this._logger.calling(this._tag, '_addEventListeners');
 
     window.addEventListener('resize', this._onResizeWindow.bind(this));
   }
@@ -79,7 +80,7 @@ class Canvas {
    * @returns {void}
    */
   _onResizeWindow() {
-    if (this._debug) this._logger.calling('_onResizeWindow');
+    if (this._debug) this._logger.calling(this._tag, '_onResizeWindow');
 
     this._canvas.width = innerWidth;
     this._canvas.height = innerHeight;
