@@ -1,5 +1,6 @@
 class Circle {
   /**
+   * @param {Logger} opt.logger
    * @param {number} opt.x
    * @param {number} opt.y
    * @param {number} opt.dx
@@ -9,10 +10,11 @@ class Circle {
    * @param {number} opt.maxRadius
    * @param {string} opt.color
    * @param {CanvasRenderingContext2D} opt.ctx
+   * @param {string} opt.tag logger tag
    * @param {boolean} opt.debug
    */
   constructor(opt) {
-    this._logger = new Logger('Canvas');
+    this._logger = opt.logger;
 
     this._x = opt.x;
     this._y = opt.y;
@@ -23,7 +25,8 @@ class Circle {
     this._maxRadius = opt.maxRadius;
     this._color = opt.color;
     this._ctx = opt.ctx;
-    this._debug = opt.debug || false;
+    this._tag = opt.tag;
+    this._debug = opt.debug;
 
     this._draw();
   }
@@ -34,7 +37,7 @@ class Circle {
    * @returns {void}
    */
   _draw() {
-    if (this._debug) this._logger.calling('_draw');
+    if (this._debug) this._logger.calling(tag, '_draw');
 
     this._ctx.beginPath();
 
@@ -55,7 +58,7 @@ class Circle {
    * @returns {void}
    */
   update(mousePosition) {
-    if (this._debug) this._logger.calling('update');
+    if (this._debug) this._logger.calling(this._tag, 'update');
 
     if (this._x + this._radius > innerWidth || this._x - this._radius < 0) {
       this._dx = -this._dx;
