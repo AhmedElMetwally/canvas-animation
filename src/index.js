@@ -1,4 +1,4 @@
-class PlayWithCanvas {
+class CanvasAnimation {
   /**
    * @param {number} minRadius
    * @param {number} maxRadius
@@ -7,9 +7,9 @@ class PlayWithCanvas {
    */
   constructor(opt) {
     this._randomColor = new RandomColor();
-    this._canvas = new Canvas('PlayWithCanvas', opt.debug);
+    this._canvas = new Canvas('CanvasAnimation', opt.debug);
     this._mouse = new Mouse();
-    this._logger = new Logger('PlayWithCanvas');
+    this._logger = new Logger('CanvasAnimation');
 
     this._minRadius = opt.minRadius;
     this._maxRadius = opt.maxRadius;
@@ -133,11 +133,13 @@ class PlayWithCanvas {
   }
 }
 
-const playWithCanvas = new PlayWithCanvas({
+
+
+const canvasAnimation = new CanvasAnimation({
   minRadius: 3,
   maxRadius: 50,
   circlesCount: 800,
   debug: false,
 });
 
-playWithCanvas.init();
+canvasAnimation.init();
