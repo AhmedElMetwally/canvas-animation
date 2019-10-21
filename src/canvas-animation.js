@@ -36,7 +36,7 @@ class CanvasAnimation {
 
     this._draw();
     this._animate();
-    this._setInterval(this._animate.bind(this));
+    this._requestAnimationFrame();
     this._resizeWindowSubscription();
   }
 
@@ -101,12 +101,20 @@ class CanvasAnimation {
   /**
    * @private
    *
-   * @param {string} callback
+   * @returns {void}
+   */
+  _requestAnimationFrame() {
+    requestAnimationFrame(this._requestAnimationFrameCallBack.bind(this));
+  }
+
+  /**
+   * @private
    *
    * @returns {void}
    */
-  _setInterval(callback) {
-    setInterval(callback, 15);
+  _requestAnimationFrameCallBack() {
+    this._animate();
+    this._requestAnimationFrame();
   }
 
   /**
